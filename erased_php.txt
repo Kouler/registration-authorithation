@@ -1,0 +1,25 @@
+<?php
+$login = filter_var(trim($_POST['login']), FILTER_SANITIZE_STRING);
+$password = filter_var(trim($_POST['password']), FILTER_SANITIZE_STRING);
+
+$hashed_pas = md5($password."hl1k32j5gGGn");
+
+$my_sql = new mysqli('localhost'/*host*/, 'root' /*user*/, 'root' /*password*/, 'register_bd' /*DB_name*/);
+
+$result = $mysql->query("SELECT * FROM `users` WHERE `login` = '$login' AND
+`password` = '$password'")
+
+$user = $result->fetch_assoc();
+
+if (count($user) == 0) {
+  echo "Такой пользователь не найден :(";
+  exit();
+}
+
+print_r($user);
+exit();
+
+$my_sql->close();
+header('Location: /');
+
+ ?>
